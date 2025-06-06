@@ -28,8 +28,7 @@ def ubah_saldo_start(message):
             keyboard.add(telebot.types.InlineKeyboardButton("Ubah Saldo", callback_data=f"ubahsaldo_{m['id_user']}"))
             bot.send_message(message.chat.id, text, parse_mode="Markdown", reply_markup=keyboard)
     except Exception as e:
-        bot.send_message(message.chat.id, f"❌ Error:
-{str(e)}")
+        bot.send_message(message.chat.id, f"❌ Kesalahan:\n{str(e)}")
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith("ubahsaldo_"))
 def pilih_user_ubah_saldo(call):
@@ -67,7 +66,7 @@ def handle_jumlah_saldo(message):
         else:
             bot.send_message(message.chat.id, f"❌ Gagal: {result.get('status')}")
     except Exception as e:
-        bot.send_message(message.chat.id, f"❌ Error: {str(e)}")
+        bot.send_message(message.chat.id, f"❌ Kesalahan saat kirim saldo:\n{str(e)}")
     user_states.pop(message.chat.id)
 
 @bot.message_handler(commands=['konfirmasitopup'])
@@ -88,8 +87,7 @@ def handle_token_topup(message):
         else:
             bot.send_message(message.chat.id, f"❌ Gagal: {result.get('status')}")
     except Exception as e:
-        bot.send_message(message.chat.id, f"❌ Error:
-{str(e)}")
+        bot.send_message(message.chat.id, f"❌ Kesalahan saat konfirmasi:\n{str(e)}")
     user_states.pop(message.chat.id)
 
 bot.polling()
